@@ -15,7 +15,7 @@ const Container = styled.div`
 function ChoiceContainer(props) {
   const [state, setState] = useState({
     playerChoise: "",
-    pcChoice: "",
+    oponentChoice: "",
     unSelected: true,
   });
 
@@ -23,13 +23,13 @@ function ChoiceContainer(props) {
     if (state.unSelected) {
       setState({
         playerChoise: value,
-        pcChoice: SelectPChoice(),
+        oponentChoice: SelectOponentChoice(),
         unSelected: false,
       });
     }
   };
 
-  const SelectPChoice = () => {
+  const SelectOponentChoice = () => {
     let number = Math.floor(Math.random() * 3);
     let choice = "";
     switch (number) {
@@ -49,11 +49,11 @@ function ChoiceContainer(props) {
   useEffect(() => {
     const FindWinner = () => {
       if (
-        state.pcChoice !== "" &&
-        state.pcChoice !== "" &&
+        state.oponentChoice !== "" &&
+        state.oponentChoice !== "" &&
         state.unSelected === false
       ) {
-        let result = `${state.playerChoise}-${state.pcChoice}`;
+        let result = `${state.playerChoise}-${state.oponentChoice}`;
         switch (result) {
           case "rock-scissors":
             props.showWinner("player");
@@ -65,13 +65,13 @@ function ChoiceContainer(props) {
             props.showWinner("player");
             break;
           case "scissors-rock":
-            props.showWinner("pc");
+            props.showWinner("oponent");
             break;
           case "paper-scissors":
-            props.showWinner("pc");
+            props.showWinner("oponent");
             break;
           case "rock-paper":
-            props.showWinner("pc");
+            props.showWinner("oponent");
             break;
           default:
             props.showWinner("draw");
@@ -80,7 +80,7 @@ function ChoiceContainer(props) {
 
         setState({
           playerChoise: "",
-          pcChoice: "",
+          oponentChoice: "",
           unSelected: true,
         });
       }
