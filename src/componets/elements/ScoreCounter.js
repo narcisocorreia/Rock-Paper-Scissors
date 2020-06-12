@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -18,9 +18,23 @@ const Onwer = styled.h2`
 `;
 
 function ScoreCounter(props) {
+
+  useEffect(() => {
+    if (props.points > 0) {
+      const node = document.getElementById(`${props.onwer}Points`);
+      node.classList.add("animate__animated", "animate__bounce");
+
+      // When the animation ends, we clean the classes and resolve the Promise
+      function handleAnimationEnd() {
+        node.classList.remove("animate__animated", "animate__bounce");
+      }
+      node.addEventListener("animationend", handleAnimationEnd);
+    }
+  }, [props.onwer, props.points]);
+
   return (
     <Container>
-      <Points>{props.points}</Points>
+      <Points id={`${props.onwer}Points`}>{props.points}</Points>
       <Onwer>{props.onwer}</Onwer>
     </Container>
   );

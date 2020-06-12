@@ -86,10 +86,10 @@ function ChoiceContainer(props) {
       }
     };
     FindWinner();
-  }, [state]);
+  }, [state, props]);
 
   return (
-    <Container>
+    <Container id="pointsContainer">
       <Choice
         background={rock}
         id="playerChoise"
